@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>SCLM Global - Supply Chain & Logistics Management</title>
+    <script type="module" crossorigin src="/assets/index-CGUqvDk-.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-Dkh1F1HR.css">
+    <link rel="stylesheet" href="/assets/custom-style.css">
+  </head>
+  <body>
+    <div id="root"></div>
+    
+    <!-- VÒNG QUAY SCLM LUCKY SPIN -->
+    <a href="https://globalsclmlusckyspin.netlify.app/" target="_blank" rel="noopener noreferrer" id="lucky-spin-wheel" class="lucky-spin-container" title="Chơi vòng quay may mắn SCLM">
+      <img src="/lucky-spin-logo.png.png" alt="SCLM Lucky Spin interactive wheel for promotional games and prizes" class="spin-logo-static">
+    </a>
+    
+    <!-- HỖ TRỢ 24/7 -->
+    <a href="https://connect.viber.com/business/ea6b050a-b4c1-11f0-b475-16a159ce570c" target="_blank" rel="noopener noreferrer" id="support-247" class="support-container" title="Liên hệ hỗ trợ 24/7 qua Viber">
+      <img src="/ho-tro-logo.png.jpg" alt="Hỗ trợ 24/7 SCLM" class="support-logo">
+    </a>
+    
+    <script>
+      // Kéo thả logo SCLM Lucky Spin
+      const luckySpinWheel = document.getElementById('lucky-spin-wheel');
+      let isDragging = false;
+      let hasMoved = false;
+      let currentX;
+      let currentY;
+      let initialX;
+      let initialY;
+      let xOffset = 0;
+      let yOffset = 0;
+
+      luckySpinWheel.addEventListener('mousedown', dragStart);
+      document.addEventListener('mousemove', drag);
+      document.addEventListener('mouseup', dragEnd);
+
+      // Touch events cho mobile
+      luckySpinWheel.addEventListener('touchstart', dragStart);
+      document.addEventListener('touchmove', drag);
+      document.addEventListener('touchend', dragEnd);
+
+      // Ngăn link mở khi đang kéo
+      luckySpinWheel.addEventListener('click', (e) => {
+        if (hasMoved) {
+          e.preventDefault();
+          hasMoved = false;
+        }
+      });
+
+      function dragStart(e) {
+        if (e.type === 'touchstart') {
+          initialX = e.touches[0].clientX - xOffset;
+          initialY = e.touches[0].clientY - yOffset;
+        } else {
+          initialX = e.clientX - xOffset;
+          initialY = e.clientY - yOffset;
+        }
+
+        if (e.target === luckySpinWheel || e.target.parentNode === luckySpinWheel) {
+          isDragging = true;
+          hasMoved = false;
+          luckySpinWheel.classList.add('dragging');
+        }
+      }
+
+      function drag(e) {
+        if (isDragging) {
+          e.preventDefault();
+          hasMoved = true;
+          
+          if (e.type === 'touchmove') {
+            currentX = e.touches[0].clientX - initialX;
+            currentY = e.touches[0].clientY - initialY;
+          } else {
+            currentX = e.clientX - initialX;
+            currentY = e.clientY - initialY;
+          }
+
+          xOffset = currentX;
+          yOffset = currentY;
+
+          setTranslate(currentX, currentY, luckySpinWheel);
+        }
+      }
+
+      function dragEnd(e) {
+        initialX = currentX;
+        initialY = currentY;
+        isDragging = false;
+        luckySpinWheel.classList.remove('dragging');
+      }
+
+      function setTranslate(xPos, yPos, el) {
+        el.style.transform = `translate3d(${xPos}px, ${yPos}px, 0)`;
+      }
+      
+      // Chèn thanh thông báo vào đúng vị trí sau menu
+      setTimeout(() => {
+        const header = document.querySelector('header');
+        const nav = document.querySelector('nav');
+        
+        // Tạo thanh thông báo
+        const announcementBar = document.createElement('div');
+        announcementBar.className = 'announcement-bar';
+        announcementBar.innerHTML = `
+          <div class="announcement-content">
+            <span class="announcement-icon">🎉</span>
+            <span class="announcement-text">
+              SCLM đang mở chương trình hỗ trợ đặc biệt giúp người dùng kích hoạt vận hành chỉ từ 30 USD. Tham gia ngay hôm nay để mở khóa quyền lợi và cơ hội sinh lợi dành riêng cho bạn!
+            </span>
+            <span class="announcement-icon">💎</span>
+            <span class="announcement-text">
+              SCLM đang mở chương trình hỗ trợ đặc biệt giúp người dùng kích hoạt vận hành chỉ từ 30 USD. Tham gia ngay hôm nay để mở khóa quyền lợi và cơ hội sinh lợi dành riêng cho bạn!
+            </span>
+            <span class="announcement-icon">🎉</span>
+          </div>
+        `;
+        
+        // Chèn sau header/nav
+        if (header) {
+          header.insertAdjacentElement('afterend', announcementBar);
+        } else if (nav) {
+          nav.insertAdjacentElement('afterend', announcementBar);
+        } else {
+          // Nếu không tìm thấy, chèn vào đầu #root
+          const root = document.getElementById('root');
+          if (root && root.firstChild) {
+            root.insertBefore(announcementBar, root.firstChild.nextSibling);
+          }
+        }
+      }, 500);
+      
+      // Thêm hotline vào contact-info-section
+      setTimeout(() => {
+        const contactInfoSection = document.querySelector('.contact-info-section ul');
+        if (contactInfoSection) {
+          // Kiểm tra xem đã có hotline chưa
+          const hasHotline = Array.from(contactInfoSection.children).some(li => 
+            li.textContent.includes('0582') || li.textContent.includes('Hotline')
+          );
+          
+          if (!hasHotline) {
+            const hotlineItem = document.createElement('li');
+            hotlineItem.innerHTML = '📞 Hotline: <b>0582 779 977</b>';
+            contactInfoSection.appendChild(hotlineItem);
+          }
+        }
+      }, 800);
+      
+      // Thay thế icon emoji bằng SVG đẹp cho Giải pháp section
+      setTimeout(() => {
+        const solutionsSection = document.querySelector('section#solutions');
+        if (!solutionsSection) return;
+        
+        // SVG Icons chuyên nghiệp
+        const svgIcons = {
+          0: `<svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="url(#grad1)" fill-opacity="0.2"/>
+                <path d="M2 17L12 22L22 17" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path d="M2 12L12 17L22 12" stroke="url(#grad1)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" /></linearGradient></defs>
+              </svg>`,
+          1: `<svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="3" y="3" width="18" height="18" rx="2" stroke="url(#grad2)" stroke-width="2" fill="url(#grad2)" fill-opacity="0.2"/>
+                <path d="M3 9H21" stroke="url(#grad2)" stroke-width="2"/>
+                <path d="M9 3V21" stroke="url(#grad2)" stroke-width="2"/>
+                <circle cx="15" cy="15" r="2" fill="url(#grad2)"/>
+                <defs><linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" /></linearGradient></defs>
+              </svg>`,
+          2: `<svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18H19C20.1046 18 21 17.1046 21 16Z" stroke="url(#grad3)" stroke-width="2" fill="url(#grad3)" fill-opacity="0.2"/>
+                <path d="M3 10H21" stroke="url(#grad3)" stroke-width="2"/>
+                <circle cx="7" cy="14" r="1" fill="url(#grad3)"/>
+                <circle cx="12" cy="14" r="1" fill="url(#grad3)"/>
+                <defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" /></linearGradient></defs>
+              </svg>`,
+          3: `<svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="9" stroke="url(#grad4)" stroke-width="2" fill="url(#grad4)" fill-opacity="0.2"/>
+                <path d="M12 6V12L16 14" stroke="url(#grad4)" stroke-width="2" stroke-linecap="round"/>
+                <defs><linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" /></linearGradient></defs>
+              </svg>`,
+          4: `<svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z" stroke="url(#grad5)" stroke-width="2" stroke-linejoin="round" fill="url(#grad5)" fill-opacity="0.2"/>
+                <defs><linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" /></linearGradient></defs>
+              </svg>`,
+          5: `<svg width="45" height="45" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.93913 15 5.92172 15.4214 5.17157 16.1716C4.42143 16.9217 4 17.9391 4 19V21" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="12" cy="7" r="4" stroke="url(#grad6)" stroke-width="2" fill="url(#grad6)" fill-opacity="0.2"/>
+                <defs><linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#ffd700;stop-opacity:1" /><stop offset="100%" style="stop-color:#ffed4e;stop-opacity:1" /></linearGradient></defs>
+              </svg>`
+        };
+        
+        // Tìm tất cả card trong solutions section
+        const gridDiv = solutionsSection.querySelector('div[style*="grid"]');
+        if (!gridDiv) return;
+        
+        const cards = Array.from(gridDiv.children);
+        cards.forEach((card, index) => {
+          const iconContainer = card.querySelector('div:first-child');
+          if (iconContainer && svgIcons[index]) {
+            iconContainer.innerHTML = svgIcons[index];
+            iconContainer.style.cssText += ' display: flex !important; align-items: center !important; justify-content: center !important;';
+          }
+        });
+      }, 1000);
+    </script>
+    
+  </body>
+</html>

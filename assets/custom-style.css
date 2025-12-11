@@ -1,0 +1,900 @@
+/* ===== XÓA HOÀN TOÀN VÒNG QUAY CŨ VÀ NÚT HỖ TRỢ CŨ ===== */
+/* Ẩn hết vòng quay cũ và nút hỗ trợ cũ */
+div[style*="position: fixed"][style*="z-index: 9999"],
+div[style*="position: fixed"][style*="z-index: 9998"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  width: 0 !important;
+  height: 0 !important;
+}
+
+/* ===== TỐI ƯU CHO MOBILE ===== */
+html, body {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+  touch-action: pan-y !important;
+}
+
+#root {
+  overflow-x: hidden !important;
+  max-width: 100vw !important;
+}
+
+/* ===== THANH THÔNG BÁO CHẠY ===== */
+.announcement-bar {
+  position: relative;
+  width: 100%;
+  background: linear-gradient(90deg, #0a2e65 0%, #154a9a 50%, #0a2e65 100%);
+  background-size: 200% 100%;
+  animation: gradientSlide 5s ease infinite;
+  padding: 12px 0;
+  z-index: 1000;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3),
+              0 0 30px rgba(255, 215, 0, 0.4);
+  border-bottom: 3px solid #ffd700;
+  margin-top: 0;
+}
+
+.announcement-content {
+  display: flex;
+  white-space: nowrap;
+  animation: marquee 30s linear infinite;
+  gap: 50px;
+  align-items: center;
+}
+
+.announcement-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.8),
+               0 0 20px rgba(255, 215, 0, 0.6),
+               0 2px 5px rgba(0, 0, 0, 0.5);
+  letter-spacing: 0.5px;
+  padding: 0 20px;
+}
+
+.announcement-icon {
+  font-size: 24px;
+  animation: bounce 2s ease-in-out infinite;
+}
+
+/* Animation cho thanh thông báo */
+@keyframes marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes gradientSlide {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+  }
+  50% {
+    transform: translateY(-5px) scale(1.1);
+  }
+}
+
+/* Bỏ padding-top vì thanh thông báo giờ là relative */
+body {
+  padding-top: 0 !important;
+}
+
+/* ===== ẨN CÁC NÚT PAGINATION CỦA BANNER ===== */
+button[aria-label*="Chọn banner"],
+button[aria-label*="banner"],
+div[style*="position: absolute"][style*="bottom"] button,
+.banner-pagination,
+.slider-pagination,
+.carousel-indicators {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* ===== LOGO SCLM LUCKY SPIN (CÓ THỂ KÉO VÀ CLICK) ===== */
+.lucky-spin-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  text-decoration: none;
+  display: block;
+}
+
+.lucky-spin-container.dragging {
+  transition: none;
+  cursor: grabbing;
+}
+
+.spin-logo-static {
+  width: 120px;
+  height: 120px;
+  object-fit: contain;
+  animation: glowPulseOnly 2s ease-in-out infinite, floatUpDown 3s ease-in-out infinite;
+  filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+  pointer-events: none;
+}
+
+/* Hiệu ứng nhấp nháy + lơ lửng */
+@keyframes glowPulseOnly {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6))
+            drop-shadow(0 0 30px rgba(255, 215, 0, 0.4))
+            drop-shadow(0 0 40px rgba(255, 215, 0, 0.2));
+  }
+  50% {
+    filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1))
+            drop-shadow(0 0 60px rgba(255, 215, 0, 0.8))
+            drop-shadow(0 0 80px rgba(255, 215, 0, 0.6));
+  }
+}
+
+@keyframes floatUpDown {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Hiệu ứng hover */
+.lucky-spin-container:hover .spin-logo-static {
+  transform: scale(1.1);
+  filter: drop-shadow(0 0 50px rgba(255, 215, 0, 1))
+          drop-shadow(0 0 70px rgba(255, 215, 0, 0.8));
+}
+
+/* Hiệu ứng click */
+.lucky-spin-container:active .spin-logo-static {
+  transform: scale(0.95);
+}
+
+/* ===== LOGO HỖ TRỢ 24/7 MỚI ===== */
+.support-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9998;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+}
+
+.support-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  background: transparent !important;
+  filter: brightness(1.1) contrast(1.1);
+}
+
+/* Xóa nền trắng cho container */
+.support-container {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 9998;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: block;
+  background: transparent !important;
+  padding: 0;
+  margin: 0;
+}
+
+/* ===== HIỆU ỨNG ĐẸP CHO MENU NAVIGATION ===== */
+/* Style cho tất cả các link trong nav - Thẳng hàng */
+nav a,
+a[href="#about"],
+a[href="#solutions"],
+a[href="#contact"],
+a[href*="Hợp tác"],
+a[href*="đối tác"] {
+  position: relative !important;
+  color: white !important;
+  text-decoration: none !important;
+  padding: 10px 18px !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  transition: all 0.3s ease !important;
+  border-right: 2px solid rgba(255, 255, 255, 0.2) !important;
+  letter-spacing: 0.3px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  vertical-align: middle !important;
+  line-height: 1.5 !important;
+}
+
+/* Bỏ border cho item cuối */
+nav a:last-child {
+  border-right: none !important;
+}
+
+/* Hiệu ứng hover */
+nav a:hover {
+  color: #ffd700 !important;
+  background: rgba(255, 255, 255, 0.1) !important;
+  border-radius: 8px !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* Hiệu ứng gạch dưới khi hover */
+nav a::after {
+  content: '' !important;
+  position: absolute !important;
+  bottom: 0 !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  width: 0 !important;
+  height: 3px !important;
+  background: linear-gradient(90deg, #ffd700, #ffed4e) !important;
+  transition: width 0.3s ease !important;
+  border-radius: 2px !important;
+}
+
+nav a:hover::after {
+  width: 80% !important;
+}
+
+/* Hiệu ứng active/click */
+nav a:active {
+  transform: translateY(0) !important;
+}
+
+/* Nút "Trở thành đối tác" nổi bật hơn */
+a[href*="đối tác"],
+a[style*="padding: 8px 12px"] {
+  background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%) !important;
+  color: #0a2e65 !important;
+  padding: 10px 20px !important;
+  border-radius: 25px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4) !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  animation: pulseButton 2s ease-in-out infinite !important;
+}
+
+a[href*="đối tác"]:hover {
+  background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%) !important;
+  transform: translateY(-3px) scale(1.05) !important;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6) !important;
+}
+
+/* Animation cho nút đối tác */
+@keyframes pulseButton {
+  0%, 100% {
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+  }
+  50% {
+    box-shadow: 0 6px 25px rgba(255, 215, 0, 0.7);
+  }
+}
+
+/* ===== VIẾT HOA TẤT CẢ TIÊU ĐỀ ===== */
+h1, h2, h3, h4 {
+  text-transform: uppercase !important;
+  letter-spacing: 1.5px !important;
+}
+
+/* ===== GIẢI PHÁP & MÔ HÌNH NỔI BẬT - CARD ĐẸP ===== */
+/* Tìm section Giải pháp */
+section#solutions {
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* Background động với particles */
+section#solutions::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  background: 
+    radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(10, 46, 101, 0.15) 0%, transparent 50%),
+    repeating-linear-gradient(45deg, transparent, transparent 60px, rgba(255, 215, 0, 0.03) 60px, rgba(255, 215, 0, 0.03) 120px) !important;
+  animation: bgMove 20s linear infinite !important;
+  pointer-events: none !important;
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0 0, 100% 100%, 0 0;
+  }
+  100% {
+    background-position: 100% 100%, 0 0, 100% 100%;
+  }
+}
+
+/* Style cho tất cả card trong section solutions */
+section#solutions div[style*="grid"] > div {
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+  border: 2px solid transparent !important;
+  border-radius: 20px !important;
+  padding: 30px 24px !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+section#solutions div[style*="grid"] > div::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 4px !important;
+  background: linear-gradient(90deg, #ffd700, #ffed4e, #ffd700) !important;
+  transform: translateX(-100%) !important;
+  transition: transform 0.6s ease !important;
+}
+
+section#solutions div[style*="grid"] > div:hover::before {
+  transform: translateX(0) !important;
+}
+
+section#solutions div[style*="grid"] > div:hover {
+  transform: translateY(-12px) scale(1.02) !important;
+  box-shadow: 0 20px 50px rgba(255, 215, 0, 0.3),
+              0 0 40px rgba(10, 46, 101, 0.1) !important;
+  border-color: rgba(255, 215, 0, 0.3) !important;
+}
+
+/* Style cho icon trong card - SVG đẹp */
+section#solutions div[style*="grid"] > div > div:first-child {
+  width: 80px !important;
+  height: 80px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(135deg, #0a2e65 0%, #154a9a 50%, #0a2e65 100%) !important;
+  background-size: 200% 200% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto 20px !important;
+  font-size: 0 !important;
+  box-shadow: 0 10px 25px rgba(10, 46, 101, 0.4),
+              inset 0 2px 10px rgba(255, 255, 255, 0.1) !important;
+  position: relative !important;
+  animation: iconFloat 3s ease-in-out infinite, gradientShift 3s ease infinite !important;
+  overflow: visible !important;
+}
+
+/* Tạo halo effect xung quanh icon */
+section#solutions div[style*="grid"] > div > div:first-child::before {
+  content: '' !important;
+  position: absolute !important;
+  inset: -5px !important;
+  border-radius: 22px !important;
+  background: linear-gradient(45deg, #ffd700, transparent, #ffd700) !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease !important;
+  z-index: -1 !important;
+  animation: rotate 3s linear infinite !important;
+}
+
+section#solutions div[style*="grid"] > div:hover > div:first-child::before {
+  opacity: 0.6 !important;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+section#solutions div[style*="grid"] > div:hover > div:first-child {
+  animation: iconRotate 0.6s ease !important;
+  transform: scale(1.1) !important;
+  box-shadow: 0 12px 30px rgba(255, 215, 0, 0.5) !important;
+}
+
+@keyframes iconFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes iconRotate {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(10deg) scale(1.15);
+  }
+  100% {
+    transform: rotate(0deg) scale(1.1);
+  }
+}
+
+/* Style cho tiêu đề card */
+section#solutions div[style*="grid"] > div > div:nth-child(2) {
+  color: #0a2e65 !important;
+  font-size: 20px !important;
+  font-weight: 800 !important;
+  margin-bottom: 12px !important;
+  position: relative !important;
+  display: inline-block !important;
+}
+
+section#solutions div[style*="grid"] > div:hover > div:nth-child(2) {
+  color: #ffd700 !important;
+  text-shadow: 0 2px 8px rgba(255, 215, 0, 0.3) !important;
+}
+
+/* Style cho mô tả card */
+section#solutions div[style*="grid"] > div > div:nth-child(3) {
+  color: #475569 !important;
+  font-size: 15px !important;
+  line-height: 1.7 !important;
+  font-weight: 500 !important;
+}
+
+/* Thêm badge "HOT" cho card đầu tiên */
+section#solutions div[style*="grid"] > div:first-child::after {
+  content: '🔥 HOT' !important;
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  background: linear-gradient(135deg, #ff6b6b, #ff4444) !important;
+  color: white !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(255, 68, 68, 0.4) !important;
+  animation: badgePulse 2s ease-in-out infinite !important;
+}
+
+@keyframes badgePulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Thêm badge "NEW" cho card thứ 2 */
+section#solutions div[style*="grid"] > div:nth-child(2)::after {
+  content: '✨ NEW' !important;
+  position: absolute !important;
+  top: 15px !important;
+  right: 15px !important;
+  background: linear-gradient(135deg, #667eea, #764ba2) !important;
+  color: white !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4) !important;
+}
+
+/* ===== HIỆU ỨNG ĐẸP CHO TOÀN WEBSITE ===== */
+/* Gradient background động */
+body {
+  background: linear-gradient(-45deg, #f8f9fa, #e9ecef, #dee2e6, #f8f9fa);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Hiệu ứng fade in cho nội dung */
+#root {
+  animation: fadeInUp 1s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation nhấp nháy */
+@keyframes spinGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.5))
+            drop-shadow(0 0 25px rgba(255, 215, 0, 0.3));
+  }
+  50% {
+    filter: drop-shadow(0 0 30px rgba(255, 215, 0, 0.9))
+            drop-shadow(0 0 50px rgba(255, 215, 0, 0.6))
+            drop-shadow(0 0 70px rgba(255, 215, 0, 0.4));
+  }
+}
+
+/* Hiệu ứng hover phóng to */
+div[style*="position: fixed"][style*="z-index: 9999"][style*="bottom: 20px"][style*="right: 20px"]:hover {
+  transform: scale(1.1) !important;
+  filter: drop-shadow(0 0 40px rgba(255, 215, 0, 1))
+          drop-shadow(0 0 60px rgba(255, 215, 0, 0.8)) !important;
+}
+
+/* Ẩn vòng ngoài có gradient vàng cam */
+div[style*="position: fixed"][style*="z-index: 9999"] > div > div[style*="conic-gradient"] {
+  background: none !important;
+  box-shadow: none !important;
+  animation: none !important;
+}
+
+/* Giữ lại vòng xanh navy bên trong */
+div[style*="position: fixed"][style*="z-index: 9999"] > div > div[style*="conic-gradient"] > div[style*="linear-gradient(135deg, rgb(10, 46, 101)"] {
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+}
+
+/* ===== THAY LOGO HỖ TRỢ 24/7 ===== */
+/* Thay icon message bằng logo mới */
+div[style*="position: fixed"][style*="z-index: 9998"] div[style*="fontSize: 28px"] {
+  font-size: 0 !important; /* Ẩn icon cũ */
+  width: 35px !important;
+  height: 35px !important;
+  background-image: url('/ho-tro-logo.png.png') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+}
+
+/* ===== THAY LOGO VÒNG QUAY ===== */
+/* Ẩn logo cũ trong vòng quay - thu nhỏ về 0 */
+div[style*="position: fixed"][style*="z-index: 9999"] img[src="/logo-sclm.png"],
+div[style*="position: fixed"][style*="z-index: 9999"] img[alt="SCLM Logo"] {
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  display: none !important;
+}
+
+/* Thu nhỏ div chứa logo cũ */
+div[style*="position: absolute"][style*="top: 50%"][style*="left: 50%"][style*="transform: translate(-50%, -50%)"][style*="width: 48%"][style*="border: 4px solid"] {
+  width: 0 !important;
+  height: 0 !important;
+  opacity: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+}
+
+/* PHÓNG TO LOGO MỚI - Đặt logo mới vào giữa vòng quay */
+div[style*="position: fixed"][style*="z-index: 9999"]::after {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: 50% !important;
+  height: 50% !important;
+  background-image: url('/lucky-spin-logo.png.png') !important;
+  background-size: contain !important;
+  background-repeat: no-repeat !important;
+  background-position: center !important;
+  z-index: 100 !important;
+  border-radius: 50% !important;
+}
+
+/* Thêm hiệu ứng nhấp nháy cho nút 24/7 */
+div[style*="position: fixed"][style*="z-index: 9998"] {
+  animation: supportGlow 2s ease-in-out infinite !important;
+}
+
+@keyframes supportGlow {
+  0%, 100% {
+    filter: drop-shadow(0 0 10px rgba(0, 168, 255, 0.4));
+  }
+  50% {
+    filter: drop-shadow(0 0 20px rgba(0, 168, 255, 0.8))
+            drop-shadow(0 0 30px rgba(0, 168, 255, 0.5));
+  }
+}
+
+/* ===== HIỆU ỨNG CHUYỂN ĐỘNG TOÀN TRANG ===== */
+
+/* Fade in khi scroll vào viewport */
+section, header, footer, div[class*="container"] {
+  animation: fadeInUp 0.8s ease-out backwards !important;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Parallax effect cho background */
+body {
+  position: relative !important;
+}
+
+body::before {
+  content: '' !important;
+  position: fixed !important;
+  top: -50% !important;
+  left: -50% !important;
+  width: 200% !important;
+  height: 200% !important;
+  background: radial-gradient(circle at 20% 50%, rgba(10, 46, 101, 0.03) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(21, 74, 154, 0.03) 0%, transparent 50%) !important;
+  animation: parallaxFloat 30s ease-in-out infinite !important;
+  z-index: -1 !important;
+  pointer-events: none !important;
+}
+
+@keyframes parallaxFloat {
+  0%, 100% {
+    transform: translate(0, 0) rotate(0deg);
+  }
+  25% {
+    transform: translate(5%, -5%) rotate(1deg);
+  }
+  50% {
+    transform: translate(-3%, 5%) rotate(-1deg);
+  }
+  75% {
+    transform: translate(-5%, -3%) rotate(0.5deg);
+  }
+}
+
+/* Hover effects cho tất cả buttons */
+button:not(.lucky-spin-container):not(.support-container), 
+a[class*="button"]:not(.lucky-spin-container):not(.support-container), 
+input[type="submit"] {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+button:not(.lucky-spin-container):not(.support-container)::before, 
+a[class*="button"]:not(.lucky-spin-container):not(.support-container)::before, 
+input[type="submit"]::before {
+  content: '' !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  width: 0 !important;
+  height: 0 !important;
+  border-radius: 50% !important;
+  background: rgba(255, 255, 255, 0.3) !important;
+  transform: translate(-50%, -50%) !important;
+  transition: width 0.6s, height 0.6s !important;
+  z-index: 0 !important;
+}
+
+button:not(.lucky-spin-container):not(.support-container):hover::before, 
+a[class*="button"]:not(.lucky-spin-container):not(.support-container):hover::before, 
+input[type="submit"]:hover::before {
+  width: 300px !important;
+  height: 300px !important;
+}
+
+button:not(.lucky-spin-container):not(.support-container):hover, 
+a[class*="button"]:not(.lucky-spin-container):not(.support-container):hover, 
+input[type="submit"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Floating particles effect */
+#root::after {
+  content: '' !important;
+  position: fixed !important;
+  width: 100% !important;
+  height: 100% !important;
+  top: 0 !important;
+  left: 0 !important;
+  background-image: 
+    radial-gradient(circle at 10% 20%, rgba(255, 215, 0, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 90% 80%, rgba(21, 74, 154, 0.05) 0%, transparent 20%),
+    radial-gradient(circle at 50% 50%, rgba(10, 46, 101, 0.03) 0%, transparent 30%) !important;
+  animation: particlesFloat 25s ease-in-out infinite !important;
+  pointer-events: none !important;
+  z-index: 1 !important;
+}
+
+@keyframes particlesFloat {
+  0%, 100% {
+    transform: translateY(0) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translateY(-20px) scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth !important;
+}
+
+/* Scale effect khi hover vào images */
+img:not(.spin-logo-static):not(.support-logo) {
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+img:not(.spin-logo-static):not(.support-logo):hover {
+  transform: scale(1.05) !important;
+}
+
+/* Text headings - Màu đơn giản rõ ràng (mặc định cho nền sáng) */
+h1, h2, h3, h4 {
+  color: #0a2e65 !important;
+  font-weight: 700 !important;
+  text-shadow: none !important;
+  -webkit-text-stroke: 0 !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+  background: none !important;
+  animation: none !important;
+  filter: none !important;
+}
+
+/* Tiêu đề chính "Global Supply Chain & Logistics Management" - Màu trắng bạch kim chuyên nghiệp */
+header h1,
+h1:first-of-type {
+  color: #e5e4e2 !important;
+  font-weight: 700 !important;
+  text-shadow: 
+    0 1px 2px rgba(255, 255, 255, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* Bỏ hết hiệu ứng phát sáng */
+
+/* ===== CONTACT INFO SECTION - LUÔN HIỂN THỊ CẢ MOBILE ===== */
+.contact-info-section {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  padding: 40px 20px !important;
+  background: #f8fbff !important;
+}
+
+.contact-info-section ul {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+  align-items: center !important;
+  gap: 24px !important;
+  list-style: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+.contact-info-section li {
+  display: flex !important;
+  align-items: center !important;
+  color: #0a2e65 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .contact-info-section {
+    padding: 30px 15px !important;
+  }
+  
+  .contact-info-section ul {
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+  
+  .contact-info-section li {
+    font-size: 14px !important;
+    text-align: center !important;
+  }
+}
+
+/* Override màu chữ cho các phần có nền tối - đơn giản rõ ràng */
+
+/* Phần có background xanh đậm - chữ màu trắng */
+div[style*="background: linear-gradient(135deg, #0a2e65"] h3,
+div[style*="background:linear-gradient(135deg, #0a2e65"] h3,
+div[style*="background: linear-gradient(135deg, rgb(10, 46, 101)"] h3 {
+  color: #ffffff !important;
+  background: none !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+}
+
+/* Text trong phần nền xanh đậm phải màu trắng */
+div[style*="background: linear-gradient(135deg, #0a2e65"] p,
+div[style*="background: linear-gradient(135deg, #0a2e65"] div,
+div[style*="background: linear-gradient(135deg, #0a2e65"] span,
+div[style*="background:linear-gradient(135deg, #0a2e65"] p,
+div[style*="background:linear-gradient(135deg, #0a2e65"] div,
+div[style*="background:linear-gradient(135deg, #0a2e65"] span {
+  color: #ffffff !important;
+}
+
+/* Section "Về SCLM Global" - Đổi nền trắng thành xanh đậm */
+section#about h2,
+section[style*="667eea"] h2 {
+  color: #ffffff !important;
+  background: none !important;
+  -webkit-text-stroke: 0 !important;
+  text-shadow: none !important;
+  filter: none !important;
+  animation: none !important;
+  -webkit-background-clip: unset !important;
+  -webkit-text-fill-color: unset !important;
+  background-clip: unset !important;
+}
+
+/* Đổi nền trắng trong section#about thành xanh đậm */
+section#about div[style*="background: rgba(255, 255, 255"],
+section#about div[style*="background:rgba(255,255,255"],
+section#about div[style*="background: rgba(255,255,255"] {
+  background: #0a2e65 !important;
+}
+
+/* Text trong phần này màu trắng */
+section#about p,
+section#about div,
+section#about span {
+  color: #ffffff !important;
+}
+
+/* Đổi toàn bộ nền section#about thành xanh đậm */
+section#about {
+  background: linear-gradient(135deg, #0a2e65 0%, #154a9a 100%) !important;
+}
