@@ -862,17 +862,19 @@ footer {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  padding: 15px 10px !important;
-  background: #f8fbff !important;
+  padding: 18px 10px !important;
+  background: linear-gradient(135deg, #0a2e65 0%, #154a9a 100%) !important;
+  box-shadow: 0 4px 15px rgba(10, 46, 101, 0.3) !important;
+  border-bottom: 2px solid #ffd700 !important;
 }
 
 .contact-info-section ul {
   display: flex !important;
   flex-direction: row !important;
-  flex-wrap: nowrap !important;
+  flex-wrap: wrap !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 12px !important;
+  gap: 16px !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
@@ -881,47 +883,59 @@ footer {
 .contact-info-section li {
   display: inline-flex !important;
   align-items: center !important;
-  color: #0a2e65 !important;
-  font-size: 11px !important;
-  font-weight: 500 !important;
+  color: #ffffff !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
   white-space: nowrap !important;
-  padding: 4px 8px !important;
-  background: rgba(10, 46, 101, 0.05) !important;
-  border-radius: 6px !important;
+  padding: 8px 16px !important;
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-radius: 25px !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  transition: all 0.3s ease !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+.contact-info-section li:hover {
+  background: rgba(255, 215, 0, 0.2) !important;
+  border-color: #ffd700 !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.4) !important;
 }
 
 .contact-info-section li b {
-  margin-left: 4px !important;
-  font-size: 11px !important;
+  margin-left: 6px !important;
+  font-size: 14px !important;
+  color: #ffd700 !important;
+  font-weight: 700 !important;
 }
 
 /* Mobile responsive - TỐI ƯU TOÀN DIỆN */
 @media (max-width: 768px) {
-  /* Contact info section - CỰC KỲ NHỎ GỌN TRÊN MOBILE */
+  /* Contact info section - ĐẸP VÀ GỌN TRÊN MOBILE */
   .contact-info-section {
-    padding: 8px 5px !important;
+    padding: 12px 8px !important;
   }
   
   .contact-info-section ul {
     flex-direction: row !important;
-    flex-wrap: nowrap !important;
-    gap: 4px !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
     justify-content: center !important;
     align-items: center !important;
   }
   
   .contact-info-section li {
-    font-size: 7px !important;
+    font-size: 11px !important;
     white-space: nowrap !important;
-    padding: 2px 4px !important;
-    background: rgba(10, 46, 101, 0.08) !important;
-    border-radius: 3px !important;
-    line-height: 1.2 !important;
+    padding: 6px 12px !important;
+    background: rgba(255, 255, 255, 0.15) !important;
+    border-radius: 20px !important;
+    line-height: 1.3 !important;
   }
   
   .contact-info-section li b {
-    font-size: 7px !important;
-    margin-left: 1px !important;
+    font-size: 11px !important;
+    margin-left: 4px !important;
   }
   
   /* Emoji icons cực nhỏ */
