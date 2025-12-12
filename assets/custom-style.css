@@ -264,26 +264,46 @@ nav a:active {
   transform: translateY(0) !important;
 }
 
-/* Nút "Trở thành đối tác" nổi bật hơn */
+/* Nút "Trở thành đối tác" - Nhỏ gọn */
 a[href*="đối tác"],
 a[style*="padding: 8px 12px"] {
   background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%) !important;
   color: #0a2e65 !important;
-  padding: 10px 20px !important;
-  border-radius: 25px !important;
-  font-weight: 700 !important;
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4) !important;
-  border: 2px solid rgba(255, 255, 255, 0.3) !important;
-  animation: pulseButton 2s ease-in-out infinite !important;
+  padding: 6px 14px !important;
+  border-radius: 20px !important;
+  font-weight: 600 !important;
+  font-size: 12px !important;
+  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3) !important;
+  border: 1.5px solid rgba(255, 255, 255, 0.3) !important;
+  animation: none !important;
+  white-space: nowrap !important;
 }
 
 a[href*="đối tác"]:hover {
   background: linear-gradient(135deg, #ffed4e 0%, #ffd700 100%) !important;
-  transform: translateY(-3px) scale(1.05) !important;
-  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6) !important;
+  transform: translateY(-2px) scale(1.03) !important;
+  box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5) !important;
 }
 
 /* Animation cho nút đối tác */
+
+/* Animation nhấp nháy cho button đăng ký mobile */
+@keyframes blinkPulse {
+  0%, 100% {
+    transform: translateY(-50%) scale(1);
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 20px rgba(255, 215, 0, 0.8), 0 0 30px rgba(255, 215, 0, 0.6);
+    opacity: 0.9;
+  }
+}
+
+.mobile-register-btn {
+  animation: blinkPulse 2s ease-in-out infinite !important;
+}
 @keyframes pulseButton {
   0%, 100% {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
@@ -794,54 +814,137 @@ h1:first-of-type {
 
 /* Bỏ hết hiệu ứng phát sáng */
 
+/* Ẩn số điện thoại 024.3793 0142 trong section tax */
+section#tax > div > div > div:last-child p:last-child {
+  display: none !important;
+}
+
+/* Di chuyển section Đăng ký lên đầu trang */
+#root {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+section#register {
+  order: -1 !important;
+}
+
+.contact-info-section {
+  order: 0 !important;
+}
+
+section[style*="linear-gradient(140deg"] {
+  order: 1 !important;
+}
+
+section#about {
+  order: 2 !important;
+}
+
+section#solutions {
+  order: 3 !important;
+}
+
+section#contact {
+  order: 4 !important;
+}
+
+section#tax {
+  order: 5 !important;
+}
+
+footer {
+  order: 6 !important;
+}
+
 /* ===== CONTACT INFO SECTION - LUÔN HIỂN THỊ CẢ MOBILE ===== */
 .contact-info-section {
   display: block !important;
   visibility: visible !important;
   opacity: 1 !important;
-  padding: 40px 20px !important;
+  padding: 15px 10px !important;
   background: #f8fbff !important;
 }
 
 .contact-info-section ul {
   display: flex !important;
-  flex-wrap: wrap !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
   justify-content: center !important;
   align-items: center !important;
-  gap: 24px !important;
+  gap: 12px !important;
   list-style: none !important;
   margin: 0 !important;
   padding: 0 !important;
 }
 
 .contact-info-section li {
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   color: #0a2e65 !important;
-  font-size: 15px !important;
+  font-size: 11px !important;
   font-weight: 500 !important;
+  white-space: nowrap !important;
+  padding: 4px 8px !important;
+  background: rgba(10, 46, 101, 0.05) !important;
+  border-radius: 6px !important;
+}
+
+.contact-info-section li b {
+  margin-left: 4px !important;
+  font-size: 11px !important;
 }
 
 /* Mobile responsive - TỐI ƯU TOÀN DIỆN */
 @media (max-width: 768px) {
-  /* Contact info section */
+  /* Contact info section - CỰC KỲ NHỎ GỌN TRÊN MOBILE */
   .contact-info-section {
-    padding: 20px 15px !important;
+    padding: 8px 5px !important;
   }
   
   .contact-info-section ul {
-    flex-direction: column !important;
-    gap: 12px !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
+    gap: 4px !important;
+    justify-content: center !important;
+    align-items: center !important;
   }
   
   .contact-info-section li {
-    font-size: 13px !important;
-    text-align: center !important;
+    font-size: 7px !important;
+    white-space: nowrap !important;
+    padding: 2px 4px !important;
+    background: rgba(10, 46, 101, 0.08) !important;
+    border-radius: 3px !important;
+    line-height: 1.2 !important;
+  }
+  
+  .contact-info-section li b {
+    font-size: 7px !important;
+    margin-left: 1px !important;
+  }
+  
+  /* Emoji icons cực nhỏ */
+  .contact-info-section li::before {
+    font-size: 8px !important;
   }
   
   /* Header - Thu gọn */
   header {
     padding: 8px 0 !important;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    z-index: 1000 !important;
+    background: rgba(10, 46, 101, 0.98) !important;
+    backdrop-filter: blur(10px) !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  /* Add padding to body to compensate for fixed header */
+  body {
+    padding-top: 60px !important;
   }
   
   header > div > div {
@@ -854,14 +957,33 @@ h1:first-of-type {
     height: 32px !important;
   }
   
-  /* Navigation - Gọn gàng hơn */
+  /* Navigation - Gọn gàng hơn, tất cả cùng hàng */
   nav {
-    gap: 8px !important;
+    gap: 6px !important;
+    display: flex !important;
+    flex-wrap: wrap !important;
+    align-items: center !important;
   }
   
   nav a {
-    padding: 8px 10px !important;
-    font-size: 12px !important;
+    padding: 6px 8px !important;
+    font-size: 11px !important;
+  }
+  
+  /* Button "Trở thành đối tác" - CỰC NHỎ, CÙNG HÀNG VỚI MENU */
+  a[href*="đối tác"] {
+    padding: 6px 10px !important;
+    font-size: 10px !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    border-radius: 12px !important;
+    display: inline-flex !important;
+    align-items: center !important;
+  }
+  
+  /* Ẩn button "Trở thành đối tác" trong header nếu nó nằm ngoài nav */
+  header > div > div > a[href*="đối tác"]:not(nav a) {
+    display: none !important;
   }
   
   /* Banner section */

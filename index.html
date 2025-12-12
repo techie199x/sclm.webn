@@ -1,10 +1,42 @@
 <!doctype html>
-<html lang="en">
+<html lang="vi">
   <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="icon" type="image/png" href="/logo-sclm.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>SCLM Global - Supply Chain & Logistics Management</title>
+    
+    <!-- Primary Meta Tags -->
+    <title>SCLM Global - Supply Chain & Logistics Management | Nền tảng Chuỗi Cung Ứng Quốc Tế</title>
+    <meta name="title" content="SCLM Global - Supply Chain & Logistics Management | Nền tảng Chuỗi Cung Ứng Quốc Tế" />
+    <meta name="description" content="SCLM là nền tảng kết nối doanh nghiệp với chuỗi cung ứng quốc tế. Tối ưu logistics, kho vận, mô hình cửa hàng trung gian. Hỗ trợ đặc biệt từ 30 USD. Liên hệ: 0944.699.299 - 0822.699.299" />
+    <meta name="keywords" content="SCLM, supply chain, logistics, chuỗi cung ứng, kho vận, xuất nhập khẩu, thương mại quốc tế, cửa hàng trung gian" />
+    <meta name="author" content="SCLM Global" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://sclm.vn/" />
+    <meta property="og:title" content="SCLM Global - Supply Chain & Logistics Management" />
+    <meta property="og:description" content="Nền tảng kết nối doanh nghiệp với chuỗi cung ứng quốc tế. Tối ưu logistics, kho vận. Hỗ trợ đặc biệt từ 30 USD. Hotline: 0944.699.299 - 0822.699.299" />
+    <meta property="og:image" content="https://sclm.vn/banner-sclm.jpg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SCLM Global - Supply Chain & Logistics Management" />
+    <meta property="og:site_name" content="SCLM Global" />
+    <meta property="og:locale" content="vi_VN" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://sclm.vn/" />
+    <meta property="twitter:title" content="SCLM Global - Supply Chain & Logistics Management" />
+    <meta property="twitter:description" content="Nền tảng kết nối doanh nghiệp với chuỗi cung ứng quốc tế. Tối ưu logistics, kho vận. Hỗ trợ đặc biệt từ 30 USD." />
+    <meta property="twitter:image" content="https://sclm.vn/banner-sclm.jpg" />
+    
+    <!-- Additional SEO -->
+    <link rel="canonical" href="https://sclm.vn/" />
+    <meta name="robots" content="index, follow" />
+    <meta name="language" content="Vietnamese" />
+    <meta name="revisit-after" content="7 days" />
+    
     <script type="module" crossorigin src="/assets/index-CGUqvDk-.js"></script>
     <link rel="stylesheet" crossorigin href="/assets/index-Dkh1F1HR.css">
     <link rel="stylesheet" href="/assets/custom-style.css">
@@ -132,6 +164,36 @@
             root.insertBefore(announcementBar, root.firstChild.nextSibling);
           }
         }
+        
+        // Thêm button "Mở biểu mẫu đăng ký" vào giữa bên trái (mobile)
+        if (window.innerWidth <= 768) {
+          const headerDiv = header ? header.querySelector('div > div') : null;
+          if (headerDiv) {
+            const registerBtn = document.createElement('a');
+            registerBtn.href = '#register';
+            registerBtn.className = 'mobile-register-btn';
+            registerBtn.innerHTML = '📝 Đăng ký';
+            registerBtn.style.cssText = `
+              position: fixed;
+              top: 50%;
+              left: 10px;
+              transform: translateY(-50%);
+              background: linear-gradient(135deg, #ffd700, #ffed4e);
+              color: #0a2e65;
+              padding: 8px 14px;
+              border-radius: 20px;
+              font-size: 12px;
+              font-weight: 700;
+              text-decoration: none;
+              box-shadow: 0 4px 12px rgba(255, 215, 0, 0.5);
+              z-index: 1001;
+              white-space: nowrap;
+              border: 2px solid rgba(255, 255, 255, 0.5);
+              animation: blinkPulse 2s ease-in-out infinite;
+            `;
+            document.body.appendChild(registerBtn);
+          }
+        }
       }, 500);
       
       // Thêm hotline vào contact-info-section
@@ -140,12 +202,12 @@
         if (contactInfoSection) {
           // Kiểm tra xem đã có hotline chưa
           const hasHotline = Array.from(contactInfoSection.children).some(li => 
-            li.textContent.includes('0582') || li.textContent.includes('Hotline')
+            li.textContent.includes('0944') || li.textContent.includes('0822') || li.textContent.includes('Hotline')
           );
           
           if (!hasHotline) {
             const hotlineItem = document.createElement('li');
-            hotlineItem.innerHTML = '📞 Hotline: <b>0582 779 977</b>';
+            hotlineItem.innerHTML = '📞 Hotline: <b>0944.699.299 - 0822.699.299</b>';
             contactInfoSection.appendChild(hotlineItem);
           }
         }
@@ -207,6 +269,135 @@
           }
         });
       }, 1000);
+      
+      // Tạo popup modal cho form đăng ký
+      setTimeout(() => {
+        // Tạo modal HTML
+        const modalHTML = `
+          <div id="registerModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.7); z-index:10000; overflow-y:auto;">
+            <div style="max-width:650px; margin:50px auto; background:rgba(255,255,255,0.97); padding:30px; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.25); position:relative;">
+              <button onclick="document.getElementById('registerModal').style.display='none'" style="position:absolute; top:15px; right:15px; background:#d9534f; color:white; border:none; border-radius:50%; width:35px; height:35px; font-size:20px; cursor:pointer; font-weight:bold;">×</button>
+              
+              <img src="/logo-sclm.png" alt="SCLM Logo" style="display:block; margin:0 auto 20px auto; max-width:150px;">
+              <h2 style="text-align:center; color:#004080;">Biểu mẫu xin đăng ký mở cửa hàng mới - SCLM</h2>
+              
+              <form id="regForm" style="margin-top:20px;">
+                <label style="font-weight:bold; color:#333;">Tên:</label>
+                <input type="text" name="ten" required style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Tuổi:</label>
+                <input type="number" name="tuoi" required style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Kinh nghiệm làm việc online:</label>
+                <input type="text" name="kinh_nghiem" style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Công việc hiện tại:</label>
+                <input type="text" name="cong_viec" style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Quốc gia hoạt động:</label>
+                <input type="text" name="quoc_gia" style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Vốn khởi đầu (USD):</label>
+                <input type="number" name="von" required style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Thu nhập lý tưởng hàng tháng (USD):</label>
+                <input type="number" name="thu_nhap" style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Email:</label>
+                <input type="email" name="email" required style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Số điện thoại:</label>
+                <input type="text" name="sdt" required style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <label style="font-weight:bold; color:#333;">Số CCCD:</label>
+                <input type="text" name="so_cccd" required pattern="[0-9]{9,12}" placeholder="Nhập 9-12 số CCCD" style="width:100%; padding:10px; margin:8px 0 20px 0; border:1px solid #ccc; border-radius:8px;">
+
+                <button type="submit" style="background:linear-gradient(90deg, #007bff, #00c853); color:white; padding:12px 20px; border:none; border-radius:8px; font-size:16px; cursor:pointer; width:100%;">Gửi đăng ký</button>
+              </form>
+              
+              <p style="margin-top:20px; font-size:14px; color:#d9534f; text-align:center; font-style:italic;">⚠️ Vui lòng tuân thủ quy định & hoạt động minh bạch theo chính sách của SCLM</p>
+              
+              <div style="margin-top:25px; padding:15px; border-top:1px solid #ddd; font-size:15px; line-height:1.6; color:#333; background:#fdfdfd; border-radius:8px;">
+                <p><strong>Hệ thống SCLM</strong> là đơn vị trung gian tiếp nhận và xử lý thông tin cho các doanh nghiệp, hoạt động minh bạch, tuân thủ pháp luật Việt Nam.</p>
+                <p>Toàn bộ hoạt động của hệ thống được đăng ký và quản lý theo quy định của Cục Thuế Nhà nước Trung ương.</p>
+                <p><strong>SCLM Global</strong> – đã được Meta xác minh <span style="color:#1877f2;">tích xanh doanh nghiệp</span>.</p>
+              </div>
+            </div>
+          </div>
+        `;
+        
+        // Thêm modal vào body
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        
+        // Xử lý click vào các link/button đăng ký
+        document.addEventListener('click', (e) => {
+          const target = e.target;
+          
+          // Kiểm tra nếu click vào link đăng ký hoặc nút "Trở thành đối tác"
+          if (target.closest('a[href="#register"]') || 
+              target.closest('.mobile-register-btn') ||
+              (target.href && target.href.includes('#register')) ||
+              (target.textContent && target.textContent.includes('Trở thành đối tác')) ||
+              target.closest('a[href*="doi-tac"]')) {
+            e.preventDefault();
+            document.getElementById('registerModal').style.display = 'block';
+          }
+        });
+        
+        // Xử lý submit form - Gửi đến Google Sheets
+        document.getElementById('regForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+          
+          const submitBtn = e.target.querySelector('button[type="submit"]');
+          const originalText = submitBtn.textContent;
+          submitBtn.disabled = true;
+          submitBtn.textContent = '⏳ Đang gửi...';
+          
+          const formData = new FormData(e.target);
+          const data = {
+            ten: formData.get('ten'),
+            tuoi: formData.get('tuoi'),
+            kinh_nghiem: formData.get('kinh_nghiem'),
+            cong_viec: formData.get('cong_viec'),
+            quoc_gia: formData.get('quoc_gia'),
+            von: formData.get('von'),
+            thu_nhap: formData.get('thu_nhap'),
+            email: formData.get('email'),
+            sdt: formData.get('sdt'),
+            so_cccd: formData.get('so_cccd'),
+            thoi_gian: new Date().toLocaleString('vi-VN')
+          };
+          
+          try {
+            // TODO: Thay YOUR_GOOGLE_APPS_SCRIPT_URL bằng URL thực tế
+            const response = await fetch('YOUR_GOOGLE_APPS_SCRIPT_URL', {
+              method: 'POST',
+              mode: 'no-cors',
+              headers: {
+                'Content-Type': 'application/json',
+              },
+              body: JSON.stringify(data)
+            });
+            
+            alert('✅ Đăng ký thành công! Đội ngũ SCLM sẽ liên hệ với bạn sớm nhất.');
+            document.getElementById('registerModal').style.display = 'none';
+            document.getElementById('regForm').reset();
+          } catch (error) {
+            console.error('Error:', error);
+            alert('❌ Có lỗi xảy ra! Vui lòng thử lại hoặc liên hệ: 0944.699.299');
+          } finally {
+            submitBtn.disabled = false;
+            submitBtn.textContent = originalText;
+          }
+        });
+        
+        // Đóng modal khi click ra ngoài
+        document.getElementById('registerModal').addEventListener('click', (e) => {
+          if (e.target.id === 'registerModal') {
+            document.getElementById('registerModal').style.display = 'none';
+          }
+        });
+      }, 1200);
     </script>
     
   </body>
